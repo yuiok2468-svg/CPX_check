@@ -128,6 +128,8 @@
   .ref .mnem span{color:var(--text-mute);}
   .ref .mnem b{color:var(--amber);position:relative;}
   .ref .mnem b::after{content:'';position:absolute;left:0;right:0;bottom:-4px;height:2px;background:var(--amber);border-radius:2px;opacity:.6;}
+  .ref .mnem b.mnem-pe{color:var(--teal);}
+  .ref .mnem b.mnem-pe::after{background:var(--teal);}
   .ref .note{font-size:12px;color:var(--text-mute);font-weight:600;} .ref .note b{color:var(--amber);}
 
   /* 땡 flash */
@@ -159,10 +161,13 @@
   .sheet-topic{font-size:clamp(1.4rem,5.5vw,2rem);font-weight:900;letter-spacing:-.02em;word-break:keep-all;}
   .sheet-close{background:none;border:0;color:var(--text-dim);font-size:28px;line-height:1;cursor:pointer;padding:0 2px;flex:0 0 auto;}
   .sheet-body{overflow-y:auto;padding:16px 0 4px;flex:1;}
+  .sec-lbl{font-size:11px;font-weight:800;color:var(--text-mute);letter-spacing:.08em;text-transform:uppercase;padding:2px 0 8px;}
+  .sec-lbl.pe{border-top:1px solid rgba(34,64,91,.5);margin-top:2px;padding-top:15px;color:var(--teal);}
   .caf-row{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid rgba(34,64,91,.5);}
   .caf-row:last-child{border-bottom:0;}
   .caf-k{flex:0 0 auto;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-weight:900;font-size:17px;
     background:color-mix(in srgb,var(--amber) 16%,transparent);color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 35%,transparent);}
+  .caf-k.pe-k{background:color-mix(in srgb,var(--teal) 16%,transparent);color:var(--teal);border-color:color-mix(in srgb,var(--teal) 35%,transparent);font-size:13px;}
   .caf-main{flex:1;min-width:0;}
   .caf-lbl{font-size:11px;font-weight:700;color:var(--text-mute);letter-spacing:.04em;margin-bottom:3px;}
   .caf-v{font-size:15.5px;font-weight:600;line-height:1.55;color:var(--text);white-space:pre-wrap;word-break:break-word;}
@@ -238,6 +243,8 @@
   .mf{display:flex;gap:11px;align-items:flex-start;}
   .mf .mk{flex:0 0 auto;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-weight:900;font-size:15px;
     background:color-mix(in srgb,var(--amber) 15%,transparent);color:var(--amber);border:1px solid color-mix(in srgb,var(--amber) 32%,transparent);margin-top:2px;}
+  .mf .mk.pe{background:color-mix(in srgb,var(--teal) 15%,transparent);color:var(--teal);border-color:color-mix(in srgb,var(--teal) 32%,transparent);font-size:12px;}
+  .mf-sep{border-top:1px solid var(--line);margin:2px 0 0;padding-top:9px;font-size:10px;font-weight:800;color:var(--teal);letter-spacing:.06em;text-transform:uppercase;}
   .mf textarea{flex:1;background:var(--ink-2);border:1px solid var(--line);border-radius:9px;color:var(--text);font-family:inherit;font-size:14px;font-weight:600;line-height:1.5;padding:8px 11px;resize:vertical;min-height:42px;}
   .mf textarea:focus{outline:none;border-color:var(--teal);}
   .mf .mfl{font-size:10px;color:var(--text-mute);font-weight:700;display:block;margin-bottom:3px;letter-spacing:.05em;}
@@ -256,7 +263,7 @@
     <div class="bell-mark">
       <svg viewBox="0 0 24 24" fill="none" stroke="#052b26" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
     </div>
-    <div><h1>CPX 땡시 연습</h1><p>56개 주제 · CAF 암기 확인</p></div>
+    <div><h1>CPX 땡시 연습</h1><p>56개 주제 · CAF+P/E 암기 확인</p></div>
   </div>
   <div class="mode-switch">
     <button id="modeBell" class="on">땡시 모드</button>
@@ -281,7 +288,7 @@
     <div class="timer-num"><div class="t mono" id="timerNum">1:00</div><div class="lbl">남은 시간</div></div>
   </div>
 
-  <div class="idle-hint" id="idleHint" style="display:none">주제가 뜨면 종이에 <b style="color:var(--amber)">C · A · F</b>를 적고, <b style="color:var(--amber)">정답 확인</b>으로 맞춰보세요.</div>
+  <div class="idle-hint" id="idleHint" style="display:none">주제가 뜨면 종이에 <b style="color:var(--amber)">C · A · F</b>와 <b style="color:var(--teal)">P/E</b>를 적고, <b style="color:var(--amber)">정답 확인</b>으로 맞춰보세요.</div>
 
   <div class="controls">
     <button class="ctrl round" id="btnReset" title="처음부터 (R)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button>
@@ -314,8 +321,8 @@
 </main>
 
 <div class="ref">
-  <div class="mnem"><span>O</span><span>L</span><span>D</span><span>Co</span><span>Ex</span><b>C</b><b>A</b><b>F</b><span>E</span></div>
-  <div class="note"><b>C</b>haracter · <b>A</b>ssociated Sx · <b>F</b>actor</div>
+  <div class="mnem"><span>O</span><span>L</span><span>D</span><span>Co</span><span>Ex</span><b>C</b><b>A</b><b>F</b><span>E</span><span style="color:var(--text-mute);font-weight:700;margin:0 2px">+</span><b class="mnem-pe">P</b><span>/</span><b class="mnem-pe">E</b></div>
+  <div class="note"><b>C</b>haracter · <b>A</b>ssociated Sx · <b>F</b>actor · <b class="mnem-pe" style="color:var(--teal)">P</b>hysical <b class="mnem-pe" style="color:var(--teal)">E</b>xam</div>
 </div>
 
 <div class="flash" id="flash"><span>땡!</span></div>
@@ -334,9 +341,12 @@
     </div>
   </div>
   <div class="sheet-body">
+    <div class="sec-lbl">문진 · History (CAF)</div>
     <div class="caf-row"><div class="caf-k">C</div><div class="caf-main"><div class="caf-lbl">Character · 양상</div><div class="caf-v" id="vC"></div><textarea class="caf-ta" id="tC" placeholder="예) 쥐어짜는 / 찌르는 / 화끈거리는 · 부위·강도·발생양상"></textarea></div></div>
     <div class="caf-row"><div class="caf-k">A</div><div class="caf-main"><div class="caf-lbl">Associated Sx · 동반증상</div><div class="caf-v" id="vA"></div><textarea class="caf-ta" id="tA" placeholder="예) 발열·오심·구토·체중감소 등 계통별 동반증상"></textarea></div></div>
     <div class="caf-row"><div class="caf-k">F</div><div class="caf-main"><div class="caf-lbl">Factor · 악화/완화인자</div><div class="caf-v" id="vF"></div><textarea class="caf-ta" id="tF" placeholder="예) 식사·자세·운동·약물 등 악화/완화 요인"></textarea></div></div>
+    <div class="sec-lbl pe">신체진찰 · Physical Exam</div>
+    <div class="caf-row"><div class="caf-k pe-k">P/E</div><div class="caf-main"><div class="caf-lbl">Physical Exam · 신체진찰</div><div class="caf-v" id="vP"></div><textarea class="caf-ta" id="tP" placeholder="예) 시진·촉진·타진·청진 등 시행할 신체진찰과 확인할 소견"></textarea></div></div>
   </div>
   <div class="sheet-foot">
     <button class="sf-edit" id="sheetEdit">수정</button>
@@ -383,7 +393,7 @@
       <div class="hint">연습 중 <b style="color:var(--amber)">책갈피</b> 버튼(또는 B키)으로 잘 틀리는 주제를 표시하세요. "내 암기법(📖)"에서도 별표로 관리할 수 있습니다.</div>
     </div>
     <div class="field" style="margin-bottom:0">
-      <div class="toggle-row"><div><div class="tl">시간 종료 후 정답 표시</div><div class="ts">땡시 모드에서 "땡" 후 내 CAF를 보여주고 대기</div></div><div class="sw" id="swPause"></div></div>
+      <div class="toggle-row"><div><div class="tl">시간 종료 후 정답 표시</div><div class="ts">땡시 모드에서 "땡" 후 내 CAF+P/E를 보여주고 대기</div></div><div class="sw" id="swPause"></div></div>
       <div class="toggle-row"><div><div class="tl">소리</div><div class="ts">종료 시 "땡!" 알림음</div></div><div class="sw on" id="swSound"></div></div>
       <div class="toggle-row"><div><div class="tl">분류 표시</div><div class="ts">주제와 함께 계열 표시</div></div><div class="sw on" id="swCat"></div></div>
       <div class="toggle-row"><div><div class="tl">반복</div><div class="ts">56개를 다 돌면 셔플해서 계속</div></div><div class="sw on" id="swLoop"></div></div>
@@ -394,7 +404,7 @@
 <!-- 내 암기법 관리 -->
 <div class="mgr" id="manager">
   <div class="mgr-head">
-    <h2>내 CAF 암기법 <span class="cnt" id="mgrCnt">0 / 56</span></h2>
+    <h2>내 CAF+P/E 암기법 <span class="cnt" id="mgrCnt">0 / 56</span></h2>
     <div class="mgr-actions">
       <button id="mgrExport">내보내기</button>
       <label>불러오기<input type="file" id="mgrImport" accept="application/json,.json" hidden></label>
@@ -452,9 +462,9 @@
   const R=52,CIRC=2*Math.PI*R; ringFg.style.strokeDasharray=CIRC;
 
   /* 노트 헬퍼 */
-  function getNote(name){return S.notes[name]||{c:"",a:"",f:""};}
-  function hasNote(name){const n=S.notes[name];return !!(n&&((n.c&&n.c.trim())||(n.a&&n.a.trim())||(n.f&&n.f.trim())));}
-  function setNote(name,c,a,f){S.notes[name]={c:c||"",a:a||"",f:f||""};saveJSON(LS_NOTES,S.notes);}
+  function getNote(name){return S.notes[name]||{c:"",a:"",f:"",p:""};}
+  function hasNote(name){const n=S.notes[name];return !!(n&&((n.c&&n.c.trim())||(n.a&&n.a.trim())||(n.f&&n.f.trim())||(n.p&&n.p.trim())));}
+  function setNote(name,c,a,f,p){S.notes[name]={c:c||"",a:a||"",f:f||"",p:p||""};saveJSON(LS_NOTES,S.notes);}
 
   /* 책갈피 헬퍼 */
   function isBm(name){return S.bookmarks.has(name);}
@@ -538,11 +548,11 @@
 
   /* ── 정답 시트 ── */
   const sheet=$("sheet"),scrim=$("scrim"),sheetCat=$("sheetCat"),sheetTopic=$("sheetTopic"),
-    vC=$("vC"),vA=$("vA"),vF=$("vF"),tC=$("tC"),tA=$("tA"),tF=$("tF");
+    vC=$("vC"),vA=$("vA"),vF=$("vF"),vP=$("vP"),tC=$("tC"),tA=$("tA"),tF=$("tF"),tP=$("tP");
   let sheetTopicName=null, sheetFromBell=false;
   function renderView(n){
     function put(el,val){if(val&&val.trim()){el.textContent=val;el.classList.remove("empty");}else{el.textContent="미작성 — 수정을 눌러 작성";el.classList.add("empty");}}
-    put(vC,n.c);put(vA,n.a);put(vF,n.f);tC.value=n.c||"";tA.value=n.a||"";tF.value=n.f||"";
+    put(vC,n.c);put(vA,n.a);put(vF,n.f);put(vP,n.p);tC.value=n.c||"";tA.value=n.a||"";tF.value=n.f||"";tP.value=n.p||"";
   }
   function openSheet(t,fromBell){if(!t)return;sheetTopicName=t.name;sheetFromBell=!!fromBell;
     sheetCat.textContent=t.cat;sheetCat.style.setProperty("--sc",t.color);sheetTopic.textContent=t.name;
@@ -552,7 +562,7 @@
     scrim.classList.add("open");sheet.classList.add("open");}
   function closeSheet(){sheet.classList.remove("open","editing");scrim.classList.remove("open");
     if(S.resumeAfterSheet){S.resumeAfterSheet=false;startLoop();btnMain.textContent="일시정지";btnMain.classList.add("paused");}}
-  function saveSheet(){setNote(sheetTopicName,tC.value,tA.value,tF.value);renderView(getNote(sheetTopicName));
+  function saveSheet(){setNote(sheetTopicName,tC.value,tA.value,tF.value,tP.value);renderView(getNote(sheetTopicName));
     sheet.classList.remove("editing");refreshMgrItem(sheetTopicName);}
 
   $("btnReveal").onclick=()=>{if(S.idx>=0)openSheet(S.deck[S.idx],false);};
@@ -643,6 +653,8 @@
             '<div class="mf"><div class="mk">C</div><div style="flex:1"><span class="mfl">Character · 양상</span><textarea data-k="c" placeholder="양상 암기법">'+esc(n.c)+'</textarea></div></div>'+
             '<div class="mf"><div class="mk">A</div><div style="flex:1"><span class="mfl">Associated Sx · 동반증상</span><textarea data-k="a" placeholder="동반증상 암기법">'+esc(n.a)+'</textarea></div></div>'+
             '<div class="mf"><div class="mk">F</div><div style="flex:1"><span class="mfl">Factor · 악화/완화</span><textarea data-k="f" placeholder="악화/완화인자 암기법">'+esc(n.f)+'</textarea></div></div>'+
+            '<div class="mf-sep">신체진찰 · Physical Exam</div>'+
+            '<div class="mf"><div class="mk pe">P/E</div><div style="flex:1"><span class="mfl">Physical Exam · 신체진찰</span><textarea data-k="p" placeholder="시진·촉진·타진·청진 등 신체진찰 암기법">'+esc(n.p)+'</textarea></div></div>'+
           '</div>';
         const head=item.querySelector(".mtopic-head");
         head.onclick=()=>item.classList.toggle("exp");
@@ -678,11 +690,11 @@
   $("openManager").onclick=()=>{mgrBmOnly=false;$("mgrBmFilter").classList.remove("on");buildManager();mgrSearch.value="";syncBmUI();manager.classList.add("open");};
   $("mgrClose").onclick=()=>manager.classList.remove("open");
   $("mgrExport").onclick=()=>{const blob=new Blob([JSON.stringify(S.notes,null,2)],{type:"application/json"});
-    const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="CPX_CAF_암기법.json";
+    const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="CPX_CAF_PE_암기법.json";
     document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);};
   $("mgrImport").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
     r.onload=()=>{try{const d=JSON.parse(r.result);if(d&&typeof d==="object"){
-      let ok=0;Object.keys(d).forEach(k=>{const v=d[k];if(v&&typeof v==="object"){S.notes[k]={c:v.c||"",a:v.a||"",f:v.f||""};ok++;}});
+      let ok=0;Object.keys(d).forEach(k=>{const v=d[k];if(v&&typeof v==="object"){S.notes[k]={c:v.c||"",a:v.a||"",f:v.f||"",p:v.p||""};ok++;}});
       saveJSON(LS_NOTES,S.notes);buildManager();alert(ok+"개 주제의 암기법을 불러왔습니다.");}
       else alert("올바른 파일이 아닙니다.");}catch(err){alert("파일을 읽을 수 없습니다.");}e.target.value="";};r.readAsText(f);};
 
